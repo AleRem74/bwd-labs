@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center; /* Центр  по горизонтали */
+    align-items: center; /* Центр  по вертикали */
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    position: relative;
+}
+
+.task-list {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+    gap: 10px; /* Промежуток */
+}
+
+.task-card {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    flex: 1 1 calc(33% - 10px); /* Ширина карточек */
+}
+
+
+.burger, .close {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.burger.open {
+    transform: rotate(90deg); /*  анимация поворота */
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Начальная позиция вне экрана */
+    width: 250px;
+    height: 100%;
+    background-color: #444;
+    color: white;
+    transition: left 0.3s ease; /* Анимация появления */
+    z-index: 1000;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    border-bottom: 1px solid #555;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar.active {
+    left: 0; /* Позиция, когда сайдбар активен */
+}
+
+
+/* Элементы списка */
+.sidebar ul li {
+    opacity: 0; /* Начальное состояние для анимации */
+    transform: translateX(-20px); /* Начальная позиция для анимации */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.sidebar.active ul li {
+    opacity: 1; /* Конечное состояние для анимации */
+    transform: translateX(0); /* Конечная позиция для анимации */
+}
+/* Задержки появления*/
+.sidebar ul li:nth-child(1) { transition-delay: 0.1s; }
+.sidebar ul li:nth-child(2) { transition-delay: 0.2s; }
+.sidebar ul li:nth-child(3) { transition-delay: 0.3s; }
+.sidebar ul li:nth-child(4) { transition-delay: 0.4s; }
+
+main {
+    padding: 20px;
+}
+
