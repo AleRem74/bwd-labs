@@ -1,0 +1,12 @@
+   *.log
+   node_modules/
+   target/
+   *.tmp
+   *.class
+   *.bak
+   *.swp
+   /build
+   /dist
+   *.vscode
+   *.txt
+   
