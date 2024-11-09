@@ -6,7 +6,7 @@
    *.bak
    *.swp
    /build
-   /dist
+   /dist/
    *.vscode
    *.txt
    
