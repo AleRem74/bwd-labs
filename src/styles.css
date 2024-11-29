@@ -5,48 +5,76 @@ body {
 
 header {
     display: flex;
-    justify-content: center; /* Центр  по горизонтали */
-    align-items: center; /* Центр  по вертикали */
+    justify-content: space-between; /* Распределяем элементы по краям */
+    align-items: center;
     background-color: #333;
     color: white;
     padding: 15px;
-    position: relative;
+    position: fixed; /* Фиксируем шапку */
+    top: 0; /* Привязываем к верхней части окна */
+    width: 100%; /* Ширина 100% */
+    z-index: 1000; /* Устанавливаем высокий z-index для отображения поверх других элементов */
+}
+
+.top-nav {
+    display: flex; /* Горизонтальное расположение */
+    list-style-type: none;
+    padding: 15px;
+    margin: auto;
+    gap: 20px;
+}
+
+.top-nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.top-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Подсветка при наведении */
+}
+
+.top-nav a.active {
+    color: grey; /* Цвет выделенного пункта */
+    pointer-events: none; /* Делает ссылку недоступной для клика */
+    font-weight: bold; /* Жирный шрифт для выделенного пункта */
 }
 
 .task-list {
     display: flex;
-    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
-    gap: 10px; /* Промежуток */
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .task-card {
     background-color: #f0f0f0;
     padding: 15px;
     border-radius: 5px;
-    flex: 1 1 calc(33% - 10px); /* Ширина карточек */
+    flex: 1 1 100%; /* Занимает всю ширину на мобильных */
+    box-sizing: border-box; /* Учитываем padding в ширину */
+    margin-bottom: 10px; /* Добавим отступ между картами */
 }
-
 
 .burger, .close {
     font-size: 24px;
     cursor: pointer;
+    display: none; /* Скрываем на больших экранах */
 }
 
 .burger.open {
-    transform: rotate(90deg); /*  анимация поворота */
+    transform: rotate(90deg);
 }
-
 
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* Начальная позиция вне экрана */
+    left: -250px;
     width: 250px;
     height: 100%;
     background-color: #444;
     color: white;
-    transition: left 0.3s ease; /* Анимация появления */
+    transition: left 0.3s ease;
     z-index: 1000;
+    overflow-y: auto; /* Добавим прокрутку, если контент больше высоты экрана */
 }
 
 .sidebar ul {
@@ -65,22 +93,20 @@ header {
 }
 
 .sidebar.active {
-    left: 0; /* Позиция, когда сайдбар активен */
+    left: 0; /* Показываем сайдбар */
 }
 
-
-/* Элементы списка */
 .sidebar ul li {
-    opacity: 0; /* Начальное состояние для анимации */
-    transform: translateX(-20px); /* Начальная позиция для анимации */
+    opacity: 0;
+    transform: translateX(-20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .sidebar.active ul li {
-    opacity: 1; /* Конечное состояние для анимации */
-    transform: translateX(0); /* Конечная позиция для анимации */
+    opacity: 1;
+    transform: translateX(0);
 }
-/* Задержки появления*/
+
 .sidebar ul li:nth-child(1) { transition-delay: 0.1s; }
 .sidebar ul li:nth-child(2) { transition-delay: 0.2s; }
 .sidebar ul li:nth-child(3) { transition-delay: 0.3s; }
@@ -88,5 +114,26 @@ header {
 
 main {
     padding: 20px;
+    margin-top: 80px; /* Отступ сверху, чтобы учесть высоту шапки */
 }
 
+img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%; /* Ограничиваем максимальную ширину на 60% ширины родителя */ 
+    z-index: 1; /* Значения для порядка отображения элементов */
+}
+
+@media (max-width: 768px) {
+    .task-card {
+        flex: 1 1 100%; /* Каждая карточка занимает всю ширину */
+    }
+    .top-nav {
+        display: none; /* Скрываем верхнее меню на мобильных */
+    }
+    .burger, .close {
+        display: block; /* иконки на мобильных */
+    }
+}

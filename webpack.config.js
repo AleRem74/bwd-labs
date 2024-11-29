@@ -1,51 +1,50 @@
-const path = require('path'); // Импортируем модуль "path" для работы с путями файлов
+const path = require('path'); // Импорт модуля "path"
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
    stats: {
-        children: true
+       children: true
    },
-   entry: './src/index.js', // Точка входа для сборки проекта
+   entry: './src/index.js', // Точка входа
    output: {
-       filename: 'bundle.js', // Имя выходного файла сборки
-       path: path.resolve(__dirname, 'dist'), // Путь для выходного файла сборки
-       clean: true
+       filename: 'bundle.js', // Имя выходного файла
+       path: path.resolve(__dirname, 'dist'), // Путь для выходного файла
+       clean: true // Очищать выходную папку перед каждой сборкой
    },
    module: {
        rules: [
            {
-               test: /\.css$/, // Регулярное выражение для обработки файлов с расширением .css
-               use: ['style-loader', 'css-loader'], // Загрузчики, используемые для обработки CSS-файлов
+               test: /\.css$/, // Регулярное выражение для .css файлов
+               use: ['style-loader', 'css-loader'], // Загрузчики для CSS
            },
        ],
    },
    plugins: [
-    
-    new HtmlWebpackPlugin({
-        template: './src/main.html', 
-        inject: true,
-        chunks: ['index'],
-        filename: 'main.html'
-    }),
-    new HtmlWebpackPlugin({
-        template: './src/projects.html', 
-        inject: true,
-        chunks: ['index'],
-        filename: 'projects.html'
-    }),
-    new HtmlWebpackPlugin({
-        template: './src/about.html', 
-        inject: true,
-        chunks: ['index'],
-        filename: 'about.html'
-    }),
-    new HtmlWebpackPlugin({
-        template: './src/tasks.html', 
-        inject: true,
-        chunks: ['index'],
-        filename: 'tasks.html'
-    }),
-],
-
+       new HtmlWebpackPlugin({
+           template: './src/main.html', // Шаблон HTML
+           inject: true,
+           
+           filename: 'main.html', // Имя для выходного файла
+       }),
+       new HtmlWebpackPlugin({
+           template: './src/projects.html', // Шаблон для projects.html
+           inject: true,
+           
+           filename: 'projects.html', // Имя для выходного файла
+       }),
+       new HtmlWebpackPlugin({
+           template: './src/about.html', // Шаблон для about.html
+           inject: true,
+           
+           filename: 'about.html', // Имя для выходного файла
+       }),
+       new HtmlWebpackPlugin({
+           template: './src/tasks.html', // Шаблон для tasks.html
+           inject: true,
+           
+           filename: 'tasks.html', // Имя для выходного файла
+       }),
+   ],
    devServer: {
        static: {
            directory: path.join(__dirname, 'dist'), // Каталог для статики
@@ -53,5 +52,4 @@ module.exports = {
        open: true, // Автоматически открывать браузер
    },
    mode: 'development', // Режим сборки
-
 };
